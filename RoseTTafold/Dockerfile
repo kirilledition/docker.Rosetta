@@ -5,7 +5,7 @@ ARG ROSETTACOMMONS_CONDA_PASSWORD
 
 RUN apt-get update
 
-RUN apt-get install -y git-all wget libgomp1 unzip && rm -rf /var/lib/apt/lists/*
+RUN apt-get install -y git wget libgomp1 unzip && rm -rf /var/lib/apt/lists/*
 RUN apt-get clean
 
 RUN wget \
@@ -14,13 +14,14 @@ RUN wget \
     && bash Miniconda3-latest-Linux-x86_64.sh -b -p /var/conda \
     && rm -f Miniconda3-latest-Linux-x86_64.sh 
 
+
 ENV PATH /var/conda/bin:$PATH
-
 RUN conda --version
-RUN git clone https://github.com/RosettaCommons/RoseTTAFold.git .
 
-COPY . /RoseTTaFold
+
 WORKDIR /RoseTTaFold
+RUN git init && echo * > .gitignore && git remote add origin https://github.com/RosettaCommons/RoseTTAFold.git && git fetch && git checkout origin/main -b main
+
 RUN conda install mamba -n base -c conda-forge
 
 RUN mamba env create -f RoseTTAFold-linux.yml
