@@ -29,15 +29,11 @@ RUN conda env create -f folding-linux.yml
 
 RUN conda config --add channels https://${ROSETTACOMMONS_CONDA_USERNAME}:${ROSETTACOMMONS_CONDA_PASSWORD}@conda.graylab.jhu.edu
 #installing pyrosetta into a base image so it gets cached between builds
-RUN mamba install -n folding pyrosetta nomkl --freeze-installed && conda clean -afy \
+RUN mamba install -n folding pyrosetta --freeze-installed && conda clean -afy \
     && find /var/conda/ -follow -type f -name '*.a' -delete \
     && find /var/conda/ -follow -type f -name '*.pyc' -delete \
     && find /var/conda/ -follow -type f -name '*.js.map' -delete \
     && find /var/conda/lib/python*/site-packages/bokeh/server/static -follow -type f -name '*.js' ! -name '*.min.js' -delete
-
-RUN conda-pack -n example -o /tmp/env.tar && \
-  mkdir /venv && cd /venv && tar xf /tmp/env.tar && \
-  rm /tmp/env.tar
 
 
 RUN wget https://files.ipd.uw.edu/pub/RoseTTAFold/weights.tar.gz && \
