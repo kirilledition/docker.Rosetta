@@ -1,0 +1,23 @@
+version: '3.9'
+services:
+  rosetta:
+    build:
+      context: .
+      dockerfile: RosettaRaw/Dockerfile
+      args:
+        MAKE_JOBS: 32
+        USERNAME: user
+        PASSWORD: password
+        ROSETTACOMMONS_CONDA_USERNAME: user
+        ROSETTACOMMONS_CONDA_USERNAME: password
+    image: rosetta:latest
+  folding:
+    build:
+      context: RoseTTafold
+      dockerfile: Dockerfile
+      args:
+        ROSETTACOMMONS_CONDA_USERNAME: user
+        ROSETTACOMMONS_CONDA_PASSWORD: password
+    image: folding:latest
+
+
