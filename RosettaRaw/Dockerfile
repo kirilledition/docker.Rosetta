@@ -125,8 +125,7 @@ RUN cd /home/rosetta.source.release-314/main/source && \
 
 
 RUN if [[ -z "$ROSETTACOMMONS_CONDA_USERNAME" ]] ; then echo Not installing pyRosetta ; else conda config --add channels https://${ROSETTACOMMONS_CONDA_USERNAME}:${ROSETTACOMMONS_CONDA_PASSWORD}@conda.graylab.jhu.edu && \
-conda install pyrosetta -y
- 
+conda install pyrosetta -y && conda clean --all 
 
 ENTRYPOINT ["/sbin/tini", "--"]
 CMD [ "/bin/bash" ]
