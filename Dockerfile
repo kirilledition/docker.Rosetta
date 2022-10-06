@@ -30,12 +30,11 @@ ARG USERNAME
 ARG PASSWORD
 
 RUN wget \
-    --no-check-certificate\
+    --no-check-certificate \
     --user ${USERNAME} \
     --password ${PASSWORD} \
     https://www.rosettacommons.org/downloads/academic/2022/wk11/rosetta.source.release-314.tar.bz2 && \
     tar -xvjf rosetta.source.release-314.tar.bz2
-
 
 RUN cd /home/rosetta.source.release-314/main/source && \
     ./scons.py \
