@@ -9,5 +9,7 @@ Provided dockerfile builds mpi version of ddg_monomer application. Feel free to 
 
 `docker build` accepts build arguments
 
+
 MAKE_JOBS - number of jobs that is provided for all make commands
+
 USERNAME, PASSWORD - credentials in license document for downloading source code
