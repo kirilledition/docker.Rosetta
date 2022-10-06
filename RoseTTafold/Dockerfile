@@ -32,8 +32,7 @@ RUN conda config --add channels https://${ROSETTACOMMONS_CONDA_USERNAME}:${ROSET
 RUN mamba install -n folding pyrosetta --freeze-installed && conda clean -afy \
     && find /var/conda/ -follow -type f -name '*.a' -delete \
     && find /var/conda/ -follow -type f -name '*.pyc' -delete \
-    && find /var/conda/ -follow -type f -name '*.js.map' -delete \
-    && find /var/conda/lib/python*/site-packages/bokeh/server/static -follow -type f -name '*.js' ! -name '*.min.js' -delete
+    && find /var/conda/ -follow -type f -name '*.js.map' -delete
 
 
 RUN wget https://files.ipd.uw.edu/pub/RoseTTAFold/weights.tar.gz && \
