@@ -2,7 +2,6 @@ FROM alpine:latest
 LABEL maintainer="Kirill Milash <kirilledition@protonmail.com>"
 
 # Migrate to Alpine
-#ARG DEBIAN_FRONTEND=noninteractive
 ARG USERNAME
 ARG PASSWORD
 ARG ROSETTACOMMONS_CONDA_USERNAME
@@ -98,12 +97,10 @@ RUN cd /tmp && \
     /bin/bash miniconda.sh -f -b -p $CONDA_DIR && \
     rm miniconda.sh
 
-RUN conda update -n base -c conda-forge conda -y
-RUN conda upgrade -y pip && \
+RUN conda update -n base -c conda-forge conda -y \
+    && conda upgrade -y pip && \
     conda config --add channels conda-forge && \
-    conda clean --all
-
-RUN conda --version
+    conda clean -y --all
 
 WORKDIR /home
 
