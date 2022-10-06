@@ -8,11 +8,14 @@ docker build \
 docker run \
     --rm \
     -it \
-    -v "$(pwd)"/data:/data \
-    -v "$(pwd)"/result:/home \
+    -v "$(pwd)"/input:/input \
+    -v "$(pwd)"/result:/result \
     --name kirill.rosetta \
-    kirill/rosetta \
-    /home/rosetta.source.release-314/main/source/bin/ddg_monomer.cxx11thread.linuxgccrelease \
-        -in:file: /data/structure.pdb \
-        -ddg::mut_file /data/mutations.mutfile \
-        -multithreading:total_threads 10
+    kirill/rosetta.mpi \
+    /bin/bash -c "
+    cd /result;
+    mpirun --allow-run-as-root -n 10 \
+    /home/rosetta.source.release-314/main/source/bin/ddg_monomer.mpi.linuxgccrelease \
+        -in:file:s /input/wildtype_structure_prediction_af2.pdb \
+        -ddg::mut_file /input/mutfile \
+    "
