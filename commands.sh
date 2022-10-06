@@ -17,5 +17,4 @@ docker run \
     mpirun --allow-run-as-root -n 10 \
     /home/rosetta.source.release-314/main/source/bin/ddg_monomer.mpi.linuxgccrelease \
         -in:file:s /input/wildtype_structure_prediction_af2.pdb \
-        -ddg::mut_file /input/mutfile \
-    "
+        -ddg::mut_file /input/mutfile"
